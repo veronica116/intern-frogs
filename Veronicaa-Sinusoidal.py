@@ -11,16 +11,16 @@ A = 1             # Amplitudo
 fs = 100000       # Sampling frequency (Hz)
 t = np.arange(0, 0.01, 1/fs)  # Waktu 10 ms
 
-# Membuat sinyal kotak
-square_wave = A * signal.square(2 * np.pi * f * t)
+# Membuat sinyal sinus
+wave = A * np.sin(2 * np.pi * f * t)
 
 # ===== AWGN SNR = -3 dB =====
 SNR_dB = -3
-signal_power = np.mean(square_wave**2) # Daya sinyal 
+signal_power = np.mean(wave**2) # Daya sinyal 
 SNR_linear = 10**(SNR_dB/10) # Konversi SNR dari dB ke linear
 noise_power = signal_power / SNR_linear # Daya noise yang diperlukan untuk mencapai SNR yang diinginkan
-noise = np.random.normal(0, np.sqrt(noise_power), len(square_wave)) # Generate noise Gaussian
-noisy_signal = square_wave + noise # menambahkan noise 
+noise = np.random.normal(0, np.sqrt(noise_power), len(wave)) # Generate noise Gaussian
+noisy_signal = wave + noise # menambahkan noise 
 
 # ===== FFT 1024 POINT =====
 NFFT = 1024 # Jumlah titik FFT
@@ -114,8 +114,8 @@ phase_ellip = np.unwrap(np.angle(h_ellip)) # Phase response untuk Elliptic
 # Plot 
 plt.figure(figsize=(10, 10))
 plt.subplot(3, 1, 1)
-plt.plot(t, square_wave, label="Original") 
-plt.title("Sinyal Original (Sinyal Kotak)")
+plt.plot(t, wave, label="Original") 
+plt.title("Sinyal Original (Sinyal Sinus)")
 plt.xlabel("Waktu (s)")
 plt.ylabel("Amplitudo")
 plt.grid(True)
@@ -123,7 +123,7 @@ plt.grid(True)
 #plot sinyal noisy tanpa fft
 plt.subplot(3, 1, 2)
 plt.plot(t, noisy_signal) #tanpa fft
-plt.title("Sinyal Kotak dengan AWGN (SNR = -3 dB)")
+plt.title("Sinyal Sinus dengan AWGN (SNR = -3 dB)")
 plt.xlabel("Waktu (s)")
 plt.ylabel("Amplitudo")
 plt.grid(True)
