@@ -1,0 +1,32 @@
+Berikut adalah penjelasan karakteristik tiap filter tersebut:
+
+1. Butterworth Filter (Garis Biru)
+Filter ini adalah filter "paling halus" dan seimbang.
+* Domain Waktu: Hasilnya sangat mulus seperti gelombang sinus, namun memiliki keterlambatan waktu (time delay/lag) yang cukup terlihat dibanding sinyal aslinya.
+* Domain Frekuensi: Menghasilkan respon yang sangat rata di passband tanpa adanya riak (ripple). Filter ini memotong noise frekuensi tinggi secara bertahap namun bersih.
+* Karakteristik: Disebut maximally flat karena tidak ada fluktuasi pada sinyal yang dilewatkan.
+
+2. Chebyshev Filter (Garis Oranye)
+Filter ini lebih "agresif" daripada Butterworth.
+*Domain Waktu: Memiliki kemiringan yang lebih tajam, namun sering kali menghasilkan overshoot atau riak (gelombang kecil) pada puncak sinyalnya.
+*Domain Frekuensi: Memberikan pemotongan yang lebih curam (steeper roll-off) di area transisi antara passband ke stopband. Artinya, ia lebih hebat dalam membuang noise yang dekat dengan frekuensi utama, tapi imbalannya adalah adanya riak pada amplitudo.
+
+3. Kalman Filter (Garis Hijau)
+Berbeda dengan dua di atas yang berbasis frekuensi murni, Kalman adalah filter berbasis estimasi probabilitas.
+*Domain Waktu: Terlihat sangat responsif. Garis hijau cenderung lebih cepat mengikuti perubahan sinyal kotak daripada Butterworth atau Chebyshev.
+*Karakteristik: Filter ini sangat cerdas karena "memprediksi" posisi sinyal berikutnya berdasarkan data sebelumnya. Sangat populer digunakan dalam sistem navigasi dan robotika karena mampu menangani ketidakpastian data dengan sangat baik.
+
+4. Alpha / Alpha-Beta Filter (Garis Merah)
+Ini adalah bentuk sederhana dari filter estimasi (mirip versi ringan dari Kalman).
+*Domain Waktu: Hasilnya berada di antara Kalman dan filter rata-rata biasa. Ia cukup cepat merespon perubahan sinyal, namun masih menyisakan sedikit "gerigi" atau sisa *noise* dibandingkan Butterworth yang mulus.
+*Karakteristik: Sangat ringan secara komputasi (tidak butuh rumus berat), sehingga sering dipakai di sistem embedded sederhana untuk menghaluskan data sensor.
+
+---
+
+# Kesimpulan dari Grafik:
+
+* Jika butuh hasil yang *paling mulus*, gunakan *Butterworth*.
+* Jika butuh respon yang *paling cepat (paling akurat mengikuti waktu)*, gunakan *Kalman*.
+* Jika butuh *pemotongan noise yang sangat tajam*, gunakan *Chebyshev*.
+
+Apakah ada bagian spesifik dari grafik frekuensi (FFT) yang ingin Anda bedah lebih dalam, misalnya pengaruh riak pada filter Chebyshev?
